@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Variational Autoencoders Mind Map</title>
+  <title>Reinforcement Learning &amp; MDPs Mind Map</title>
   <!-- MathJax for LaTeX formatting -->
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script id="MathJax-script" async
-    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+      src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
   </script>
   <style>
     body {
@@ -36,7 +36,7 @@
       border-radius: 8px;
       cursor: pointer;
       text-align: center;
-      transition: all 0.3s ease;
+      transition: transform 0.3s ease;
       box-shadow: 0 2px 4px rgba(0,0,0,0.1);
       font-weight: bold;
     }
@@ -83,7 +83,11 @@
     .infoContent {
       line-height: 1.5;
     }
-    /* Legend styles */
+    line {
+      stroke: #999;
+      stroke-width: 2;
+    }
+    /* Legend */
     .legend {
       margin-top: 20px;
       display: flex;
@@ -99,197 +103,169 @@
       height: 20px;
       border-radius: 4px;
     }
-    line {
-      stroke: #999;
-      stroke-width: 2;
-    }
   </style>
 </head>
 <body>
   <div class="container">
-    <h1>Variational Autoencoders</h1>
+    <h1>Reinforcement Learning &amp; MDPs</h1>
     
     <div class="mindmap" id="mindmap">
       <!-- SVG for connecting lines -->
       <svg width="1400" height="1200" style="position: absolute; top: 0; left: 0;">
-        <!-- Lines from central red node (center approximately at (700,600)) to Blue Nodes -->
-        <line x1="700" y1="600" x2="150" y2="150" />    <!-- Blue Node 1: Latent Variable Models -->
-        <line x1="700" y1="600" x2="1250" y2="150" />   <!-- Blue Node 2: Nonlinear LVM & Generation -->
-        <line x1="700" y1="600" x2="1350" y2="600" />   <!-- Blue Node 3: Training & ELBO -->
-        <line x1="700" y1="600" x2="1250" y2="1050" />  <!-- Blue Node 4: Variational Approximation & VAE -->
-        <line x1="700" y1="600" x2="150" y2="1050" />   <!-- Blue Node 5: Reparametrisation Trick -->
-        <line x1="700" y1="600" x2="350" y2="1150" />   <!-- Blue Node 6: Applications & Disentanglement -->
-        <line x1="700" y1="600" x2="350" y2="150" />    <!-- Blue Node 7: Conclusion -->
+        <!-- Lines from central red node (center ~ (700,600)) to Blue Nodes -->
+        <line x1="700" y1="600" x2="100" y2="100" />     <!-- Blue Node 1: What is RL? -->
+        <line x1="700" y1="600" x2="1300" y2="100" />    <!-- Blue Node 2: Markov Decision Processes -->
+        <line x1="700" y1="600" x2="1300" y2="600" />    <!-- Blue Node 3: Optimal Policies & Value Functions -->
+        <line x1="700" y1="600" x2="1300" y2="1100" />   <!-- Blue Node 4: Algorithms for Solving MDPs -->
+        <line x1="700" y1="600" x2="100" y2="1100" />    <!-- Blue Node 5: Summary & Challenges -->
         
-        <!-- Blue Node 1 to Green Nodes -->
-        <line x1="150" y1="150" x2="130" y2="220" /> <!-- Joint Distribution & Marginalization -->
-        <line x1="150" y1="150" x2="130" y2="280" /> <!-- Mixture of Gaussians Example -->
+        <!-- Blue Node 1 to Green Nodes (What is RL?) -->
+        <line x1="100" y1="100" x2="70" y2="170" />       <!-- RL Definition -->
+        <line x1="100" y1="100" x2="70" y2="230" />       <!-- Agent & Environment -->
+        <line x1="100" y1="100" x2="70" y2="290" />       <!-- Applications -->
         
-        <!-- Blue Node 2 to Green Nodes -->
-        <line x1="1250" y1="150" x2="1230" y2="220" /> <!-- Prior: \(P(z)=\mathcal{N}(0,I)\) -->
-        <line x1="1250" y1="150" x2="1230" y2="280" /> <!-- Likelihood: \(P(x|z,\phi)=\mathcal{N}(f(z,\phi),\sigma^2I)\) -->
-        <line x1="1250" y1="150" x2="1230" y2="340" /> <!-- Ancestral Sampling: \(z^\circ\sim P(z),\ x^\circ\sim P(x|z^\circ,\phi)\) -->
+        <!-- Blue Node 2 to Green Nodes (MDPs) -->
+        <line x1="1300" y1="100" x2="1270" y2="170" />     <!-- States & Transitions -->
+        <line x1="1300" y1="100" x2="1270" y2="230" />     <!-- Reward Function -->
+        <line x1="1300" y1="100" x2="1270" y2="290" />     <!-- Probabilistic Outcomes -->
         
-        <!-- Blue Node 3 to Green Nodes -->
-        <line x1="1350" y1="600" x2="1330" y2="670" /> <!-- Training: Maximize \(\sum_i \log P(x_i|\phi)\) -->
-        <line x1="1350" y1="600" x2="1330" y2="730" /> <!-- ELBO: \(\mathcal{L} = \mathbb{E}_{q(z|x,\theta)}[\log P(x|z,\phi)] - D_{KL}(q(z|x,\theta)||P(z))\) -->
-        <line x1="1350" y1="600" x2="1330" y2="790" /> <!-- Jensen's Inequality: \(\log \mathbb{E}[y] \ge \mathbb{E}[\log y]\) -->
+        <!-- Blue Node 3 to Green Nodes (Optimal Policies) -->
+        <line x1="1300" y1="600" x2="1270" y2="670" />     <!-- Discounted Reward: \( G = \sum_{i=0}^\infty \gamma^i R(s_i) \) -->
+        <line x1="1300" y1="600" x2="1270" y2="730" />     <!-- Utility: \( U^\pi(s) = \mathbb{E}\left[ \sum_{i=0}^\infty \gamma^i R(s_i) \right] \) -->
+        <line x1="1300" y1="600" x2="1270" y2="790" />     <!-- Bellman Equation: \( U(s) = R(s) + \gamma \max_a \sum_{s'} T(s'|s,a) U(s') \) -->
         
-        <!-- Blue Node 4 to Green Nodes -->
-        <line x1="1250" y1="1050" x2="1230" y2="1120" /> <!-- Variational Posterior: \(q(z|x,\theta) \approx P(z|x,\phi)\) -->
-        <line x1="1250" y1="1050" x2="1230" y2="1180" /> <!-- VAE Architecture: ELBO as \(\mathcal{L} = \mathbb{E}_{q(z|x,\theta)}[\log P(x|z,\phi)] - D_{KL}(q(z|x,\theta)||P(z))\) -->
-        <line x1="1250" y1="1050" x2="1230" y2="1240" /> <!-- VAE Algorithm: Compute \(\mu,\Sigma\) then sample -->
+        <!-- Blue Node 4 to Green Nodes (Algorithms) -->
+        <line x1="1300" y1="1100" x2="1270" y2="1170" />   <!-- Value Iteration: \( U_{\text{new}}(s) = R(s) + \gamma \max_a \sum_{s'} T(s'|s,a) U(s') \) -->
+        <line x1="1300" y1="1100" x2="1270" y2="1230" />   <!-- Policy Iteration: Evaluate \( U^\pi(s) \) and update policy -->
+        <line x1="1300" y1="1100" x2="1270" y2="1290" />   <!-- \( \epsilon \)-optimality: \( ||U_{\pi_{\text{valiter}}} - U^*|| \le \frac{2\epsilon\gamma}{1-\gamma} \) -->
         
-        <!-- Blue Node 5 to Green Nodes -->
-        <line x1="150" y1="1050" x2="130" y2="1120" /> <!-- Reparametrisation: \(z = \mu + \Sigma^{1/2}\epsilon,\quad \epsilon\sim\mathcal{N}(0,I)\) -->
-        
-        <!-- Blue Node 6 to Green Nodes -->
-        <line x1="350" y1="1150" x2="330" y2="1220" /> <!-- Applications: Generation and Resynthesis -->
-        <line x1="350" y1="1150" x2="330" y2="1280" /> <!-- Disentanglement: Beta-VAE (upweight KL) -->
-        
-        <!-- Blue Node 7 to Green Nodes -->
-        <line x1="350" y1="150" x2="330" y2="220" /> <!-- Summary: VAE learns a nonlinear latent model -->
-        <line x1="350" y1="150" x2="330" y2="280" /> <!-- Challenges: Intractable likelihood and posterior -->
+        <!-- Blue Node 5 to Green Nodes (Summary & Challenges) -->
+        <line x1="100" y1="1100" x2="70" y2="1170" />     <!-- Optimality vs. Approximation -->
+        <line x1="100" y1="1100" x2="70" y2="1230" />     <!-- Infinite Horizon & Discounting -->
+        <line x1="100" y1="1100" x2="70" y2="1290" />     <!-- Scalability & Complexity -->
       </svg>
       
-      <!-- Central Red Node: Variational Autoencoders -->
+      <!-- Central Red Node: Reinforcement Learning I -->
       <div class="node red" style="width: 280px; top: 560px; left: 610px;" 
-           onclick="showInfo('Variational Autoencoders', 
-           '&lt;ul&gt;&lt;li&gt;VAEs learn a nonlinear latent variable model over \\( x \\).&lt;/li&gt;&lt;li&gt;They combine an encoder to approximate the posterior \\( q(z|x,\\theta) \\) and a decoder that defines \\( P(x|z,\\phi) \\).&lt;/li&gt;&lt;/ul&gt;')">
-        Variational Autoencoders
+           onclick="showInfo('Reinforcement Learning I', 
+           '&lt;ul&gt;&lt;li&gt;RL is a paradigm where an agent learns a policy to maximize cumulative rewards by interacting with an environment.&lt;/li&gt;&lt;li&gt;The agent observes states, takes actions, and receives rewards.&lt;/li&gt;&lt;/ul&gt;')">
+        Reinforcement Learning I
       </div>
       
-      <!-- Blue Node 1: Latent Variable Models -->
+      <!-- Blue Node 1: What is RL? -->
       <div class="node blue" style="width: 250px; top: 20px; left: 50px;" 
-           onclick="showInfo('Latent Variable Models', 
-           '&lt;ul&gt;&lt;li&gt;Model the joint distribution \\( P(x,z) \\) with latent variable \\( z \\).&lt;/li&gt;&lt;li&gt;Marginalize \\( z \\) to get \\( P(x)=\\int P(x|z)P(z)dz \\).&lt;/li&gt;&lt;/ul&gt;')">
-        Latent Variable Models
+           onclick="showInfo('What is RL?', 
+           '&lt;ul&gt;&lt;li&gt;RL involves an agent, environment, actions, states, and rewards.&lt;/li&gt;&lt;li&gt;Example: In Pacman, the agent (Pacman) navigates a maze to collect rewards.&lt;/li&gt;&lt;/ul&gt;')">
+        What is RL?
       </div>
-      <!-- Green Nodes for Blue Node 1 -->
+      <!-- Green Nodes for What is RL? -->
       <div class="node green" style="width: 220px; top: 100px; left: 50px;" 
-           onclick="showInfo('Joint Distribution &amp; Marginalization', 
-           '&lt;ul&gt;&lt;li&gt;Joint: \\( P(x,z) \\).&lt;/li&gt;&lt;li&gt;Marginal: \\( P(x)=\\int P(x|z)P(z)dz \\).&lt;/li&gt;&lt;/ul&gt;')">
-        Joint Distribution &amp; Marginalization
+           onclick="showInfo('RL Definition', 
+           '&lt;ul&gt;&lt;li&gt;RL is the process of learning a policy \\(\\pi(a|s)\\) to maximize the expected return \\( G = \\sum_{i=0}^{\\infty}\\gamma^i R(s_i) \\).&lt;/li&gt;&lt;/ul&gt;')">
+        RL Definition
       </div>
       <div class="node green" style="width: 220px; top: 160px; left: 50px;" 
-           onclick="showInfo('Mixture of Gaussians Example', 
-           '&lt;ul&gt;&lt;li&gt;A mixture of Gaussians expresses \\( P(x) \\) as a sum over Gaussian components.&lt;/li&gt;&lt;/ul&gt;')">
-        Mixture of Gaussians Example
+           onclick="showInfo('Agent &amp; Environment', 
+           '&lt;ul&gt;&lt;li&gt;Agent takes action \\(a_t\\) in state \\(s_t\\), then receives reward \\(r_{t+1}\\) and moves to state \\(s_{t+1}\\).&lt;/li&gt;&lt;/ul&gt;')">
+        Agent &amp; Environment
       </div>
-      
-      <!-- Blue Node 2: Nonlinear Latent Variable Models & Generation -->
-      <div class="node blue" style="width: 250px; top: 20px; left: 1050px;" 
-           onclick="showInfo('Nonlinear Latent Variable Models & Generation', 
-           '&lt;ul&gt;&lt;li&gt;Prior: \\( P(z)=\\mathcal{N}(0,I) \\).&lt;/li&gt;&lt;li&gt;Likelihood: \\( P(x|z,\\phi)=\\mathcal{N}(f(z,\\phi),\\sigma^2I) \\).&lt;/li&gt;&lt;/ul&gt;')">
-        Nonlinear LVM &amp; Generation
-      </div>
-      <!-- Green Nodes for Blue Node 2 -->
-      <div class="node green" style="width: 220px; top: 100px; left: 1050px;" 
-           onclick="showInfo('Prior &amp; Likelihood', 
-           '&lt;ul&gt;&lt;li&gt;Prior: \\( P(z)=\\mathcal{N}(0,I) \\).&lt;/li&gt;&lt;li&gt;Likelihood: \\( P(x|z,\\phi)=\\mathcal{N}(f(z,\\phi),\\sigma^2I) \\).&lt;/li&gt;&lt;/ul&gt;')">
-        Prior &amp; Likelihood
-      </div>
-      <div class="node green" style="width: 220px; top: 160px; left: 1050px;" 
-           onclick="showInfo('Ancestral Sampling', 
-           '&lt;ul&gt;&lt;li&gt;Generate sample: Draw \\( z^\\circ \\sim P(z) \\), then \\( x^\\circ \\sim P(x|z^\\circ,\\phi) \\).&lt;/li&gt;&lt;/ul&gt;')">
-        Ancestral Sampling
-      </div>
-      
-      <!-- Blue Node 3: Training & ELBO -->
-      <div class="node blue" style="width: 250px; top: 480px; left: 1150px;" 
-           onclick="showInfo('Training & ELBO', 
-           '&lt;ul&gt;&lt;li&gt;Training maximizes the log-likelihood \\( \\sum_i \\log P(x_i|\\phi) \\).&lt;/li&gt;&lt;li&gt;ELBO: \\( \\mathcal{L} = \\mathbb{E}_{q(z|x,\\theta)}[\\log P(x|z,\\phi)] - D_{KL}(q(z|x,\\theta)||P(z)) \\).&lt;/li&gt;&lt;li&gt;Jensen\\\'s inequality gives \\( \\log \\mathbb{E}[y] \\ge \\mathbb{E}[\\log y] \\).&lt;/li&gt;&lt;/ul&gt;')">
-        Training &amp; ELBO
-      </div>
-      <!-- Green Nodes for Blue Node 3 -->
-      <div class="node green" style="width: 220px; top: 570px; left: 1150px;" 
-           onclick="showInfo('Maximizing Log-Likelihood', 
-           '&lt;ul&gt;&lt;li&gt;Objective: \\( \\max_{\\phi} \\sum_i \\log P(x_i|\\phi) \\).&lt;/li&gt;&lt;/ul&gt;')">
-        Maximizing Log-Likelihood
-      </div>
-      <div class="node green" style="width: 220px; top: 630px; left: 1150px;" 
-           onclick="showInfo('ELBO Derivation', 
-           '&lt;ul&gt;&lt;li&gt;ELBO: \\( \\mathcal{L} = \\mathbb{E}_{q(z|x,\\theta)}[\\log P(x|z,\\phi)] - D_{KL}(q(z|x,\\theta)||P(z)) \\).&lt;/li&gt;&lt;/ul&gt;')">
-        ELBO Derivation
-      </div>
-      <div class="node green" style="width: 220px; top: 690px; left: 1150px;" 
-           onclick="showInfo('Jensen\\\'s Inequality', 
-           '&lt;ul&gt;&lt;li&gt;For concave \\( g \\): \\( g(\\mathbb{E}[y]) \\ge \\mathbb{E}[g(y)] \\).&lt;/li&gt;&lt;/ul&gt;')">
-        Jensen's Inequality
-      </div>
-      
-      <!-- Blue Node 4: Variational Approximation & VAE -->
-      <div class="node blue" style="width: 250px; top: 950px; left: 1250px;" 
-           onclick="showInfo('Variational Approximation & VAE', 
-           '&lt;ul&gt;&lt;li&gt;Approximate the true posterior \\( P(z|x,\\phi) \\) with a simpler \\( q(z|x,\\theta) \\).&lt;/li&gt;&lt;li&gt;VAE ELBO: \\( \\mathcal{L} = \\mathbb{E}_{q(z|x,\\theta)}[\\log P(x|z,\\phi)] - D_{KL}(q(z|x,\\theta)||P(z)) \\).&lt;/li&gt;&lt;/ul&gt;')">
-        Variational Approximation &amp; VAE
-      </div>
-      <!-- Green Nodes for Blue Node 4 -->
-      <div class="node green" style="width: 220px; top: 1030px; left: 1250px;" 
-           onclick="showInfo('Variational Posterior', 
-           '&lt;ul&gt;&lt;li&gt;We choose \\( q(z|x,\\theta) \\) (often Gaussian) to approximate \\( P(z|x,\\phi) \\).&lt;/li&gt;&lt;/ul&gt;')">
-        Variational Posterior
-      </div>
-      <div class="node green" style="width: 220px; top: 1090px; left: 1250px;" 
-           onclick="showInfo('VAE Architecture', 
-           '&lt;ul&gt;&lt;li&gt;Encoder: computes \\( \\mu,\\Sigma \\) from \\( x \\).&lt;/li&gt;&lt;li&gt;Decoder: generates \\( x \\) from sampled \\( z \\).&lt;/li&gt;&lt;/ul&gt;')">
-        VAE Architecture
-      </div>
-      <div class="node green" style="width: 220px; top: 1150px; left: 1250px;" 
-           onclick="showInfo('Reconstruction vs. KL', 
-           '&lt;ul&gt;&lt;li&gt;ELBO can be viewed as reconstruction loss minus KL divergence to the prior.&lt;/li&gt;&lt;/ul&gt;')">
-        Recon. Loss - KL
-      </div>
-      
-      <!-- Blue Node 5: Reparametrisation Trick -->
-      <div class="node blue" style="width: 250px; top: 950px; left: 50px;" 
-           onclick="showInfo('Reparametrisation Trick', 
-           '&lt;ul&gt;&lt;li&gt;Allows backpropagation through stochastic sampling by writing \\( z = \\mu + \\Sigma^{1/2}\\epsilon \\), where \\( \\epsilon \\sim \\mathcal{N}(0,I) \\).&lt;/li&gt;&lt;/ul&gt;')">
-        Reparametrisation Trick
-      </div>
-      <!-- Green Node for Blue Node 5 -->
-      <div class="node green" style="width: 220px; top: 1030px; left: 50px;" 
-           onclick="showInfo('Reparametrisation Equation', 
-           '&lt;ul&gt;&lt;li&gt;\\( z = \\mu + \\Sigma^{1/2}\\epsilon, \\quad \\epsilon \\sim \\mathcal{N}(0,I) \\).&lt;/li&gt;&lt;/ul&gt;')">
-        \\( z = \\mu + \\Sigma^{1/2}\\epsilon \\)
-      </div>
-      
-      <!-- Blue Node 6: Applications, Resynthesis & Disentanglement -->
-      <div class="node blue" style="width: 250px; top: 950px; left: 50px;" 
-           onclick="showInfo('Applications & Disentanglement', 
-           '&lt;ul&gt;&lt;li&gt;Applications: Generation, resynthesis, and editing of images. &lt;/li&gt;&lt;li&gt;Disentanglement: Encouraging independent latent factors (\\( \\beta \\)-VAE).&lt;/li&gt;&lt;/ul&gt;')">
-        Applications &amp; Disentanglement
-      </div>
-      <!-- Green Nodes for Blue Node 6 -->
-      <div class="node green" style="width: 220px; top: 1030px; left: 50px;" 
+      <div class="node green" style="width: 220px; top: 220px; left: 50px;" 
            onclick="showInfo('Applications', 
-           '&lt;ul&gt;&lt;li&gt;VAEs can generate new samples and enable image resynthesis by projecting real images into latent space.&lt;/li&gt;&lt;/ul&gt;')">
+           '&lt;ul&gt;&lt;li&gt;Applications include robotics, game playing, and finance.&lt;/li&gt;&lt;/ul&gt;')">
         Applications
       </div>
+      
+      <!-- Blue Node 2: Markov Decision Processes (MDPs) -->
+      <div class="node blue" style="width: 250px; top: 20px; left: 1100px;" 
+           onclick="showInfo('Markov Decision Processes', 
+           '&lt;ul&gt;&lt;li&gt;MDPs model the environment: states \\(s\\), actions \\(a\\), transition probabilities \\(T(s\'|s,a)\\), and rewards \\(R(s)\\).&lt;/li&gt;&lt;li&gt;The next state is drawn from a distribution: \\( P(s\'|s,a) \\).&lt;/li&gt;&lt;/ul&gt;')">
+        Markov Decision Processes
+      </div>
+      <!-- Green Nodes for MDPs -->
+      <div class="node green" style="width: 220px; top: 100px; left: 1100px;" 
+           onclick="showInfo('States &amp; Transitions', 
+           '&lt;ul&gt;&lt;li&gt;State space \\(S\\) and transition relation \\(T(s\'|s,a)\\) define the dynamics.&lt;/li&gt;&lt;/ul&gt;')">
+        States &amp; Transitions
+      </div>
+      <div class="node green" style="width: 220px; top: 160px; left: 1100px;" 
+           onclick="showInfo('Reward Function', 
+           '&lt;ul&gt;&lt;li&gt;Reward function \\(R(s)\\) assigns a numerical value to each state.&lt;/li&gt;&lt;/ul&gt;')">
+        Reward Function
+      </div>
+      <div class="node green" style="width: 220px; top: 220px; left: 1100px;" 
+           onclick="showInfo('Probabilistic Outcomes', 
+           '&lt;ul&gt;&lt;li&gt;Actions have probabilistic outcomes (e.g., 80% intended, 10% lateral error).&lt;/li&gt;&lt;/ul&gt;')">
+        Probabilistic Outcomes
+      </div>
+      
+      <!-- Blue Node 3: Optimal Policies & Value Functions -->
+      <div class="node blue" style="width: 250px; top: 500px; left: 1100px;" 
+           onclick="showInfo('Optimal Policies & Value Functions', 
+           '&lt;ul&gt;&lt;li&gt;The return is discounted: \\( G = \\sum_{i=0}^{\\infty}\\gamma^i R(s_i) \\).&lt;/li&gt;&lt;li&gt;Value function: \\( U^{\\pi}(s)=\\mathbb{E}\\left[ \\sum_{i=0}^{\\infty}\\gamma^i R(s_i) \\mid s_0=s,\\pi \\right] \\).&lt;/li&gt;&lt;li&gt;Bellman Equation: \\( U(s)=R(s)+\\gamma\\max_a\\sum_{s'}T(s\'|s,a)U(s\') \\).&lt;/li&gt;&lt;/ul&gt;')">
+        Optimal Policies & Value Functions
+      </div>
+      <!-- Green Nodes for Optimal Policies -->
+      <div class="node green" style="width: 220px; top: 570px; left: 1100px;" 
+           onclick="showInfo('Discounted Reward', 
+           '&lt;ul&gt;&lt;li&gt;Return: \\( G = R(s_0)+\\gamma R(s_1)+\\gamma^2 R(s_2)+\\cdots \\), with \\( 0\\leq\\gamma<1 \\).&lt;/li&gt;&lt;/ul&gt;')">
+        Discounted Reward
+      </div>
+      <div class="node green" style="width: 220px; top: 630px; left: 1100px;" 
+           onclick="showInfo('Utility of a State', 
+           '&lt;ul&gt;&lt;li&gt;Value under policy \\( \\pi \\): \\( U^{\\pi}(s)=\\mathbb{E}[\\sum_{i=0}^\\infty \\gamma^i R(s_i)] \\).&lt;/li&gt;&lt;/ul&gt;')">
+        Utility of a State
+      </div>
+      <div class="node green" style="width: 220px; top: 690px; left: 1100px;" 
+           onclick="showInfo('Bellman Equation', 
+           '&lt;ul&gt;&lt;li&gt;Recursive relation: \\( U(s)=R(s)+\\gamma\\max_a\\sum_{s'}T(s\'|s,a)U(s\') \\).&lt;/li&gt;&lt;/ul&gt;')">
+        Bellman Equation
+      </div>
+      
+      <!-- Blue Node 4: Algorithms for Solving MDPs -->
+      <div class="node blue" style="width: 250px; top: 900px; left: 1100px;" 
+           onclick="showInfo('Algorithms for Solving MDPs', 
+           '&lt;ul&gt;&lt;li&gt;Value Iteration: Update \\( U_{new}(s)=R(s)+\\gamma\\max_a\\sum_{s'}T(s\'|s,a)U(s\') \\) iteratively until convergence.&lt;/li&gt;&lt;li&gt;Policy Iteration: Alternates between policy evaluation and policy improvement.&lt;/li&gt;&lt;/ul&gt;')">
+        Algorithms for Solving MDPs
+      </div>
+      <!-- Green Nodes for Algorithms -->
+      <div class="node green" style="width: 220px; top: 970px; left: 1100px;" 
+           onclick="showInfo('Value Iteration', 
+           '&lt;ul&gt;&lt;li&gt;Update rule: \\( U_{new}(s)=R(s)+\\gamma\\max_a\\sum_{s'}T(s\'|s,a)U(s\') \\).&lt;/li&gt;&lt;/ul&gt;')">
+        Value Iteration
+      </div>
+      <div class="node green" style="width: 220px; top: 1030px; left: 1100px;" 
+           onclick="showInfo('Policy Iteration', 
+           '&lt;ul&gt;&lt;li&gt;Iterate between evaluating the current policy and improving it by choosing better actions.&lt;/li&gt;&lt;/ul&gt;')">
+        Policy Iteration
+      </div>
+      <div class="node green" style="width: 220px; top: 1090px; left: 1100px;" 
+           onclick="showInfo('\\(\\epsilon\\)-Optimality', 
+           '&lt;ul&gt;&lt;li&gt;Error bound: \\( ||U_{\\pi_{valiter}}-U^*|| \\le \\frac{2\\epsilon\\gamma}{1-\\gamma} \\).&lt;/li&gt;&lt;/ul&gt;')">
+        \\(\\epsilon\\)-Optimality
+      </div>
+      
+      <!-- Blue Node 5: Summary & Challenges -->
+      <div class="node blue" style="width: 250px; top: 900px; left: 50px;" 
+           onclick="showInfo('Summary &amp; Challenges', 
+           '&lt;ul&gt;&lt;li&gt;Optimal policies maximize the expected discounted return. &lt;/li&gt;&lt;li&gt;Infinite horizon problems are made tractable via discounting. &lt;/li&gt;&lt;li&gt;Scalability and approximation errors remain key challenges.&lt;/li&gt;&lt;/ul&gt;')">
+        Summary &amp; Challenges
+      </div>
+      <!-- Green Nodes for Summary -->
+      <div class="node green" style="width: 220px; top: 970px; left: 50px;" 
+           onclick="showInfo('Optimality vs. Approximation', 
+           '&lt;ul&gt;&lt;li&gt;Optimal policy: \\( \\pi^*(s)=\\arg\\max_a \\sum_{s'}T(s\'|s,a)U(s\') \\).&lt;/li&gt;&lt;/ul&gt;')">
+        Optimality vs. Approximation
+      </div>
+      <div class="node green" style="width: 220px; top: 1030px; left: 50px;" 
+           onclick="showInfo('Infinite Horizon & Discounting', 
+           '&lt;ul&gt;&lt;li&gt;Discount factor \\( \\gamma \\) (with \\( 0\\leq\\gamma<1 \\)) ensures convergence.&lt;/li&gt;&lt;/ul&gt;')">
+        Infinite Horizon & Discounting
+      </div>
       <div class="node green" style="width: 220px; top: 1090px; left: 50px;" 
-           onclick="showInfo('Disentanglement', 
-           '&lt;ul&gt;&lt;li&gt;\\( \\beta \\)-VAE upweights the KL term to encourage a disentangled latent space.&lt;/li&gt;&lt;/ul&gt;')">
-        Disentanglement (\\( \\beta \\)-VAE)
+           onclick="showInfo('Scalability & Complexity', 
+           '&lt;ul&gt;&lt;li&gt;Large state spaces necessitate approximate methods.&lt;/li&gt;&lt;/ul&gt;')">
+        Scalability & Complexity
       </div>
-      
-      <!-- Blue Node 7: Conclusion -->
-      <div class="node blue" style="width: 250px; top: 100; left: 350px;" 
-           onclick="showInfo('Conclusion', 
-           '&lt;ul&gt;&lt;li&gt;VAEs provide a principled framework for learning latent variable models using variational approximations.&lt;/li&gt;&lt;li&gt;They balance reconstruction accuracy and latent regularization via the ELBO.&lt;/li&gt;&lt;/ul&gt;')">
-        Conclusion
-      </div>
-      <!-- Green Nodes for Blue Node 7 -->
-      <div class="node green" style="width: 220px; top: 170px; left: 350px;" 
-           onclick="showInfo('Key Takeaways', 
-           '&lt;ul&gt;&lt;li&gt;VAEs learn a nonlinear latent variable model over \\( x \\).&lt;/li&gt;&lt;li&gt;The ELBO is optimized via variational approximation and the reparametrisation trick.&lt;/li&gt;&lt;/ul&gt;')">
-        Key Takeaways
-      </div>
-      <div class="node green" style="width: 220px; top: 230px; left: 350px;" 
-           onclick="showInfo('Challenges & Solutions', 
-           '&lt;ul&gt;&lt;li&gt;Exact likelihood and posterior are intractable; variational methods approximate them.&lt;/li&gt;&lt;/ul&gt;')">
-        Challenges &amp; Solutions
-      </div>
-      
     </div>
     
     <!-- Information Panel -->
@@ -322,7 +298,7 @@
       document.getElementById("infoPanel").style.display = "block";
       document.getElementById("infoTitle").textContent = title;
       document.getElementById("infoContent").innerHTML = content;
-      MathJax.typesetPromise(); // Re-render LaTeX equations
+      MathJax.typesetPromise();
     }
   </script>
 </body>
