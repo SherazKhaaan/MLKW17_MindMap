@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Variational Autoencoders Mind Map</title>
+  <!-- MathJax for LaTeX formatting -->
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+  </script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      background-color: #f8f9fa;
+    }
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .mindmap {
+      position: relative;
+      width: 1400px;
+      height: 1200px;
+      margin: 20px 0;
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      overflow: hidden;
+    }
+    .node {
+      position: absolute;
+      padding: 12px;
+      border-radius: 8px;
+      cursor: pointer;
+      text-align: center;
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      font-weight: bold;
+    }
+    .node:hover {
+      transform: scale(1.05);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+    /* Colors */
+    .red {
+      background-color: #ffcccc;
+      border: 2px solid #e60000;
+      color: #990000;
+    }
+    .blue {
+      background-color: #cce5ff;
+      border: 2px solid #0066cc;
+      color: #004080;
+    }
+    .green {
+      background-color: #ccffcc;
+      border: 2px solid #00cc00;
+      color: #006600;
+      font-weight: normal;
+    }
+    /* Info panel styles */
+    #infoPanel {
+      width: 1400px;
+      min-height: 150px;
+      padding: 15px;
+      margin-top: 20px;
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      display: none;
+    }
+    .infoTitle {
+      font-size: 1.2em;
+      font-weight: bold;
+      margin-bottom: 10px;
+      color: #333;
+      border-bottom: 2px solid #ddd;
+      padding-bottom: 5px;
+    }
+    .infoContent {
+      line-height: 1.5;
+    }
+    /* Legend styles */
+    .legend {
+      margin-top: 20px;
+      display: flex;
+      gap: 20px;
+    }
+    .legendItem {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .legendBox {
+      width: 20px;
+      height: 20px;
+      border-radius: 4px;
+    }
+    line {
+      stroke: #999;
+      stroke-width: 2;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Variational Autoencoders</h1>
+    
+    <div class="mindmap" id="mindmap">
+      <!-- SVG for connecting lines -->
+      <svg width="1400" height="1200" style="position: absolute; top: 0; left: 0;">
+        <!-- Lines from central red node (center approximately at (700,600)) to Blue Nodes -->
+        <line x1="700" y1="600" x2="150" y2="150" />    <!-- Blue Node 1: Latent Variable Models -->
+        <line x1="700" y1="600" x2="1250" y2="150" />   <!-- Blue Node 2: Nonlinear LVM & Generation -->
+        <line x1="700" y1="600" x2="1350" y2="600" />   <!-- Blue Node 3: Training & ELBO -->
+        <line x1="700" y1="600" x2="1250" y2="1050" />  <!-- Blue Node 4: Variational Approximation & VAE -->
+        <line x1="700" y1="600" x2="150" y2="1050" />   <!-- Blue Node 5: Reparametrisation Trick -->
+        <line x1="700" y1="600" x2="350" y2="1150" />   <!-- Blue Node 6: Applications & Disentanglement -->
+        <line x1="700" y1="600" x2="350" y2="150" />    <!-- Blue Node 7: Conclusion -->
+        
+        <!-- Blue Node 1 to Green Nodes -->
+        <line x1="150" y1="150" x2="130" y2="220" /> <!-- Joint Distribution & Marginalization -->
+        <line x1="150" y1="150" x2="130" y2="280" /> <!-- Mixture of Gaussians Example -->
+        
+        <!-- Blue Node 2 to Green Nodes -->
+        <line x1="1250" y1="150" x2="1230" y2="220" /> <!-- Prior: \(P(z)=\mathcal{N}(0,I)\) -->
+        <line x1="1250" y1="150" x2="1230" y2="280" /> <!-- Likelihood: \(P(x|z,\phi)=\mathcal{N}(f(z,\phi),\sigma^2I)\) -->
+        <line x1="1250" y1="150" x2="1230" y2="340" /> <!-- Ancestral Sampling: \(z^\circ\sim P(z),\ x^\circ\sim P(x|z^\circ,\phi)\) -->
+        
+        <!-- Blue Node 3 to Green Nodes -->
+        <line x1="1350" y1="600" x2="1330" y2="670" /> <!-- Training: Maximize \(\sum_i \log P(x_i|\phi)\) -->
+        <line x1="1350" y1="600" x2="1330" y2="730" /> <!-- ELBO: \(\mathcal{L} = \mathbb{E}_{q(z|x,\theta)}[\log P(x|z,\phi)] - D_{KL}(q(z|x,\theta)||P(z))\) -->
+        <line x1="1350" y1="600" x2="1330" y2="790" /> <!-- Jensen's Inequality: \(\log \mathbb{E}[y] \ge \mathbb{E}[\log y]\) -->
+        
+        <!-- Blue Node 4 to Green Nodes -->
+        <line x1="1250" y1="1050" x2="1230" y2="1120" /> <!-- Variational Posterior: \(q(z|x,\theta) \approx P(z|x,\phi)\) -->
+        <line x1="1250" y1="1050" x2="1230" y2="1180" /> <!-- VAE Architecture: ELBO as \(\mathcal{L} = \mathbb{E}_{q(z|x,\theta)}[\log P(x|z,\phi)] - D_{KL}(q(z|x,\theta)||P(z))\) -->
+        <line x1="1250" y1="1050" x2="1230" y2="1240" /> <!-- VAE Algorithm: Compute \(\mu,\Sigma\) then sample -->
+        
+        <!-- Blue Node 5 to Green Nodes -->
+        <line x1="150" y1="1050" x2="130" y2="1120" /> <!-- Reparametrisation: \(z = \mu + \Sigma^{1/2}\epsilon,\quad \epsilon\sim\mathcal{N}(0,I)\) -->
+        
+        <!-- Blue Node 6 to Green Nodes -->
+        <line x1="350" y1="1150" x2="330" y2="1220" /> <!-- Applications: Generation and Resynthesis -->
+        <line x1="350" y1="1150" x2="330" y2="1280" /> <!-- Disentanglement: Beta-VAE (upweight KL) -->
+        
+        <!-- Blue Node 7 to Green Nodes -->
+        <line x1="350" y1="150" x2="330" y2="220" /> <!-- Summary: VAE learns a nonlinear latent model -->
+        <line x1="350" y1="150" x2="330" y2="280" /> <!-- Challenges: Intractable likelihood and posterior -->
+      </svg>
+      
+      <!-- Central Red Node: Variational Autoencoders -->
+      <div class="node red" style="width: 280px; top: 560px; left: 610px;" 
+           onclick="showInfo('Variational Autoencoders', 
+           '&lt;ul&gt;&lt;li&gt;VAEs learn a nonlinear latent variable model over \\( x \\).&lt;/li&gt;&lt;li&gt;They combine an encoder to approximate the posterior \\( q(z|x,\\theta) \\) and a decoder that defines \\( P(x|z,\\phi) \\).&lt;/li&gt;&lt;/ul&gt;')">
+        Variational Autoencoders
+      </div>
+      
+      <!-- Blue Node 1: Latent Variable Models -->
+      <div class="node blue" style="width: 250px; top: 20px; left: 50px;" 
+           onclick="showInfo('Latent Variable Models', 
+           '&lt;ul&gt;&lt;li&gt;Model the joint distribution \\( P(x,z) \\) with latent variable \\( z \\).&lt;/li&gt;&lt;li&gt;Marginalize \\( z \\) to get \\( P(x)=\\int P(x|z)P(z)dz \\).&lt;/li&gt;&lt;/ul&gt;')">
+        Latent Variable Models
+      </div>
+      <!-- Green Nodes for Blue Node 1 -->
+      <div class="node green" style="width: 220px; top: 100px; left: 50px;" 
+           onclick="showInfo('Joint Distribution &amp; Marginalization', 
+           '&lt;ul&gt;&lt;li&gt;Joint: \\( P(x,z) \\).&lt;/li&gt;&lt;li&gt;Marginal: \\( P(x)=\\int P(x|z)P(z)dz \\).&lt;/li&gt;&lt;/ul&gt;')">
+        Joint Distribution &amp; Marginalization
+      </div>
+      <div class="node green" style="width: 220px; top: 160px; left: 50px;" 
+           onclick="showInfo('Mixture of Gaussians Example', 
+           '&lt;ul&gt;&lt;li&gt;A mixture of Gaussians expresses \\( P(x) \\) as a sum over Gaussian components.&lt;/li&gt;&lt;/ul&gt;')">
+        Mixture of Gaussians Example
+      </div>
+      
+      <!-- Blue Node 2: Nonlinear Latent Variable Models & Generation -->
+      <div class="node blue" style="width: 250px; top: 20px; left: 1050px;" 
+           onclick="showInfo('Nonlinear Latent Variable Models & Generation', 
+           '&lt;ul&gt;&lt;li&gt;Prior: \\( P(z)=\\mathcal{N}(0,I) \\).&lt;/li&gt;&lt;li&gt;Likelihood: \\( P(x|z,\\phi)=\\mathcal{N}(f(z,\\phi),\\sigma^2I) \\).&lt;/li&gt;&lt;/ul&gt;')">
+        Nonlinear LVM &amp; Generation
+      </div>
+      <!-- Green Nodes for Blue Node 2 -->
+      <div class="node green" style="width: 220px; top: 100px; left: 1050px;" 
+           onclick="showInfo('Prior &amp; Likelihood', 
+           '&lt;ul&gt;&lt;li&gt;Prior: \\( P(z)=\\mathcal{N}(0,I) \\).&lt;/li&gt;&lt;li&gt;Likelihood: \\( P(x|z,\\phi)=\\mathcal{N}(f(z,\\phi),\\sigma^2I) \\).&lt;/li&gt;&lt;/ul&gt;')">
+        Prior &amp; Likelihood
+      </div>
+      <div class="node green" style="width: 220px; top: 160px; left: 1050px;" 
+           onclick="showInfo('Ancestral Sampling', 
+           '&lt;ul&gt;&lt;li&gt;Generate sample: Draw \\( z^\\circ \\sim P(z) \\), then \\( x^\\circ \\sim P(x|z^\\circ,\\phi) \\).&lt;/li&gt;&lt;/ul&gt;')">
+        Ancestral Sampling
+      </div>
+      
+      <!-- Blue Node 3: Training & ELBO -->
+      <div class="node blue" style="width: 250px; top: 480px; left: 1150px;" 
+           onclick="showInfo('Training & ELBO', 
+           '&lt;ul&gt;&lt;li&gt;Training maximizes the log-likelihood \\( \\sum_i \\log P(x_i|\\phi) \\).&lt;/li&gt;&lt;li&gt;ELBO: \\( \\mathcal{L} = \\mathbb{E}_{q(z|x,\\theta)}[\\log P(x|z,\\phi)] - D_{KL}(q(z|x,\\theta)||P(z)) \\).&lt;/li&gt;&lt;li&gt;Jensen\\\'s inequality gives \\( \\log \\mathbb{E}[y] \\ge \\mathbb{E}[\\log y] \\).&lt;/li&gt;&lt;/ul&gt;')">
+        Training &amp; ELBO
+      </div>
+      <!-- Green Nodes for Blue Node 3 -->
+      <div class="node green" style="width: 220px; top: 570px; left: 1150px;" 
+           onclick="showInfo('Maximizing Log-Likelihood', 
+           '&lt;ul&gt;&lt;li&gt;Objective: \\( \\max_{\\phi} \\sum_i \\log P(x_i|\\phi) \\).&lt;/li&gt;&lt;/ul&gt;')">
+        Maximizing Log-Likelihood
+      </div>
+      <div class="node green" style="width: 220px; top: 630px; left: 1150px;" 
+           onclick="showInfo('ELBO Derivation', 
+           '&lt;ul&gt;&lt;li&gt;ELBO: \\( \\mathcal{L} = \\mathbb{E}_{q(z|x,\\theta)}[\\log P(x|z,\\phi)] - D_{KL}(q(z|x,\\theta)||P(z)) \\).&lt;/li&gt;&lt;/ul&gt;')">
+        ELBO Derivation
+      </div>
+      <div class="node green" style="width: 220px; top: 690px; left: 1150px;" 
+           onclick="showInfo('Jensen\\\'s Inequality', 
+           '&lt;ul&gt;&lt;li&gt;For concave \\( g \\): \\( g(\\mathbb{E}[y]) \\ge \\mathbb{E}[g(y)] \\).&lt;/li&gt;&lt;/ul&gt;')">
+        Jensen's Inequality
+      </div>
+      
+      <!-- Blue Node 4: Variational Approximation & VAE -->
+      <div class="node blue" style="width: 250px; top: 950px; left: 1250px;" 
+           onclick="showInfo('Variational Approximation & VAE', 
+           '&lt;ul&gt;&lt;li&gt;Approximate the true posterior \\( P(z|x,\\phi) \\) with a simpler \\( q(z|x,\\theta) \\).&lt;/li&gt;&lt;li&gt;VAE ELBO: \\( \\mathcal{L} = \\mathbb{E}_{q(z|x,\\theta)}[\\log P(x|z,\\phi)] - D_{KL}(q(z|x,\\theta)||P(z)) \\).&lt;/li&gt;&lt;/ul&gt;')">
+        Variational Approximation &amp; VAE
+      </div>
+      <!-- Green Nodes for Blue Node 4 -->
+      <div class="node green" style="width: 220px; top: 1030px; left: 1250px;" 
+           onclick="showInfo('Variational Posterior', 
+           '&lt;ul&gt;&lt;li&gt;We choose \\( q(z|x,\\theta) \\) (often Gaussian) to approximate \\( P(z|x,\\phi) \\).&lt;/li&gt;&lt;/ul&gt;')">
+        Variational Posterior
+      </div>
+      <div class="node green" style="width: 220px; top: 1090px; left: 1250px;" 
+           onclick="showInfo('VAE Architecture', 
+           '&lt;ul&gt;&lt;li&gt;Encoder: computes \\( \\mu,\\Sigma \\) from \\( x \\).&lt;/li&gt;&lt;li&gt;Decoder: generates \\( x \\) from sampled \\( z \\).&lt;/li&gt;&lt;/ul&gt;')">
+        VAE Architecture
+      </div>
+      <div class="node green" style="width: 220px; top: 1150px; left: 1250px;" 
+           onclick="showInfo('Reconstruction vs. KL', 
+           '&lt;ul&gt;&lt;li&gt;ELBO can be viewed as reconstruction loss minus KL divergence to the prior.&lt;/li&gt;&lt;/ul&gt;')">
+        Recon. Loss - KL
+      </div>
+      
+      <!-- Blue Node 5: Reparametrisation Trick -->
+      <div class="node blue" style="width: 250px; top: 950px; left: 50px;" 
+           onclick="showInfo('Reparametrisation Trick', 
+           '&lt;ul&gt;&lt;li&gt;Allows backpropagation through stochastic sampling by writing \\( z = \\mu + \\Sigma^{1/2}\\epsilon \\), where \\( \\epsilon \\sim \\mathcal{N}(0,I) \\).&lt;/li&gt;&lt;/ul&gt;')">
+        Reparametrisation Trick
+      </div>
+      <!-- Green Node for Blue Node 5 -->
+      <div class="node green" style="width: 220px; top: 1030px; left: 50px;" 
+           onclick="showInfo('Reparametrisation Equation', 
+           '&lt;ul&gt;&lt;li&gt;\\( z = \\mu + \\Sigma^{1/2}\\epsilon, \\quad \\epsilon \\sim \\mathcal{N}(0,I) \\).&lt;/li&gt;&lt;/ul&gt;')">
+        \\( z = \\mu + \\Sigma^{1/2}\\epsilon \\)
+      </div>
+      
+      <!-- Blue Node 6: Applications, Resynthesis & Disentanglement -->
+      <div class="node blue" style="width: 250px; top: 950px; left: 50px;" 
+           onclick="showInfo('Applications & Disentanglement', 
+           '&lt;ul&gt;&lt;li&gt;Applications: Generation, resynthesis, and editing of images. &lt;/li&gt;&lt;li&gt;Disentanglement: Encouraging independent latent factors (\\( \\beta \\)-VAE).&lt;/li&gt;&lt;/ul&gt;')">
+        Applications &amp; Disentanglement
+      </div>
+      <!-- Green Nodes for Blue Node 6 -->
+      <div class="node green" style="width: 220px; top: 1030px; left: 50px;" 
+           onclick="showInfo('Applications', 
+           '&lt;ul&gt;&lt;li&gt;VAEs can generate new samples and enable image resynthesis by projecting real images into latent space.&lt;/li&gt;&lt;/ul&gt;')">
+        Applications
+      </div>
+      <div class="node green" style="width: 220px; top: 1090px; left: 50px;" 
+           onclick="showInfo('Disentanglement', 
+           '&lt;ul&gt;&lt;li&gt;\\( \\beta \\)-VAE upweights the KL term to encourage a disentangled latent space.&lt;/li&gt;&lt;/ul&gt;')">
+        Disentanglement (\\( \\beta \\)-VAE)
+      </div>
+      
+      <!-- Blue Node 7: Conclusion -->
+      <div class="node blue" style="width: 250px; top: 100; left: 350px;" 
+           onclick="showInfo('Conclusion', 
+           '&lt;ul&gt;&lt;li&gt;VAEs provide a principled framework for learning latent variable models using variational approximations.&lt;/li&gt;&lt;li&gt;They balance reconstruction accuracy and latent regularization via the ELBO.&lt;/li&gt;&lt;/ul&gt;')">
+        Conclusion
+      </div>
+      <!-- Green Nodes for Blue Node 7 -->
+      <div class="node green" style="width: 220px; top: 170px; left: 350px;" 
+           onclick="showInfo('Key Takeaways', 
+           '&lt;ul&gt;&lt;li&gt;VAEs learn a nonlinear latent variable model over \\( x \\).&lt;/li&gt;&lt;li&gt;The ELBO is optimized via variational approximation and the reparametrisation trick.&lt;/li&gt;&lt;/ul&gt;')">
+        Key Takeaways
+      </div>
+      <div class="node green" style="width: 220px; top: 230px; left: 350px;" 
+           onclick="showInfo('Challenges & Solutions', 
+           '&lt;ul&gt;&lt;li&gt;Exact likelihood and posterior are intractable; variational methods approximate them.&lt;/li&gt;&lt;/ul&gt;')">
+        Challenges &amp; Solutions
+      </div>
+      
+    </div>
+    
+    <!-- Information Panel -->
+    <div id="infoPanel">
+      <div class="infoTitle" id="infoTitle">Click on a concept to see details</div>
+      <div class="infoContent" id="infoContent">
+        Select any node in the mind map to display detailed information.
+      </div>
+    </div>
+    
+    <!-- Legend -->
+    <div class="legend">
+      <div class="legendItem">
+        <div class="legendBox red"></div>
+        <span>Big Picture Concepts</span>
+      </div>
+      <div class="legendItem">
+        <div class="legendBox blue"></div>
+        <span>Major Categories</span>
+      </div>
+      <div class="legendItem">
+        <div class="legendBox green"></div>
+        <span>Details &amp; Equations</span>
+      </div>
+    </div>
+  </div>
+  
+  <script>
+    function showInfo(title, content) {
+      document.getElementById("infoPanel").style.display = "block";
+      document.getElementById("infoTitle").textContent = title;
+      document.getElementById("infoContent").innerHTML = content;
+      MathJax.typesetPromise(); // Re-render LaTeX equations
+    }
+  </script>
+</body>
+</html>
